@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import logo from "./profileImg.png";
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
@@ -33,6 +33,7 @@ import tripguide from "./tripguide.png";
 import profileImg from "./profileImg.png";
 
 import resume from "./pdf/resume.pdf";
+import favicon from "./favicon.png";
 
 export {
   logo,
@@ -66,4 +67,5 @@ export {
   technoglobe,
   profileImg,
   resume,
+  favicon,
 };

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { logo, menu, close, profileImg } from "../assets";
+import { logo, menu, close, profileImg, favicon } from "../assets";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -43,7 +43,7 @@ const Navbar = () => {
           }}
         >
           <img
-            src={profileImg}
+            src={favicon}
             alt="logo"
             className="w-9 h-9 object-cover border-gray-300 rounded-full border"
           />
