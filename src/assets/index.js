@@ -32,6 +32,8 @@ import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
 import profileImg from "./profileImg.png";
 
+import resume from "./pdf/resume.pdf";
+
 export {
   logo,
   backend,
@@ -63,4 +65,5 @@ export {
   tripguide,
   technoglobe,
   profileImg,
+  resume,
 };

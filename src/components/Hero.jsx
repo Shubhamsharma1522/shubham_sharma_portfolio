@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { ComputersCanvas } from "./canvas";
-import { profileImg } from "../assets";
+import { profileImg, resume } from "../assets";
 
 const Hero = () => {
   return (
@@ -24,12 +24,28 @@ const Hero = () => {
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
             A Full Stack Developer <br className="sm:block hidden" />
           </p>
+
+          <span class="d-flex mt-3">
+            <button
+              type="submit"
+              className="mt-10 bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
+            >
+              <a
+                rel="noreferrer"
+                target="_blank"
+                class="cta-btn cta-btn--resume"
+                href={resume}
+              >
+                View Resume
+              </a>
+            </button>
+          </span>
         </div>
       </div>
       <div
       // className={`absolute right-0 w-[400px] top-[20px]`}
       >
-        <img src={profileImg} alt="Profile" />
+        <img src={profileImg} alt="Profile" className="object-none" />
       </div>
 
       {/* <ComputersCanvas /> */}
