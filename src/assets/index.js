@@ -32,7 +32,7 @@ import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
 import profileImg from "./profileImg.png";
 
-import resume from "./pdf/resume.pdf";
+import resume from "./pdf/Shubham Sharma Resume.pdf";
 import favicon from "./favicon.png";
 
 export {
