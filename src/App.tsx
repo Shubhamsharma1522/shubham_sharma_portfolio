@@ -247,40 +247,8 @@ export default function App() {
             width: '100%',
           }}
         >
-          {/* Left Hero Typography & Warped Wireframe */}
+          {/* Left Hero Typography */}
           <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            
-            {/* Warped Coordinate Mesh SVG */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '460px',
-                height: '300px',
-                pointerEvents: 'none',
-                opacity: 0.35,
-              }}
-            >
-              <svg viewBox="0 0 440 280" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', stroke: 'rgba(59, 130, 246, 0.45)' }}>
-                <path d="M 40 40 Q 220 20 400 40" strokeWidth="1.2" />
-                <path d="M 30 100 Q 220 70 410 100" strokeWidth="1.2" />
-                <path d="M 20 160 Q 220 200 420 160" strokeWidth="1.2" />
-                <path d="M 40 240 Q 220 260 400 240" strokeWidth="1.2" />
-                
-                <path d="M 60 20 Q 50 140 70 260" strokeWidth="1.2" />
-                <path d="M 140 20 Q 130 140 150 260" strokeWidth="1.2" />
-                <path d="M 220 15 Q 220 140 220 265" strokeWidth="1.5" stroke="#3b82f6" />
-                <path d="M 300 20 Q 310 140 290 260" strokeWidth="1.2" />
-                <path d="M 380 20 Q 390 140 370 260" strokeWidth="1.2" />
-
-                <circle cx="220" cy="85" r="2.5" fill="#60a5fa" />
-                <circle cx="220" cy="180" r="2.5" fill="#60a5fa" />
-                <circle cx="140" cy="130" r="2" fill="#3b82f6" opacity="0.6" />
-                <circle cx="300" cy="130" r="2" fill="#3b82f6" opacity="0.6" />
-              </svg>
-            </div>
 
             {/* Live Status Pill */}
             <div
