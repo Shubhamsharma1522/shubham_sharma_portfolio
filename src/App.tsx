@@ -46,7 +46,7 @@ export default function App() {
         fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       }}
     >
-      {/* 1. Full-screen Interactive Canvas Mesh Grid (REA Decompiled Physics Engine) */}
+      {/* 1. Full-screen Interactive Canvas Mesh Grid */}
       <InteractiveMeshGrid
         gridSize={58}
         repulsionStrength={-0.65}
@@ -222,7 +222,7 @@ export default function App() {
         </nav>
       </header>
 
-      {/* ── SECTION 1: HERO SPOTLIGHT (Exact sujitpradhan.com/#speaker replica) ── */}
+      {/* ── SECTION 1: HERO SPOTLIGHT ── */}
       <section
         id="hero"
         style={{
@@ -831,7 +831,7 @@ export default function App() {
           }}
         >
           <span>© 2026 Shubham Sharma. All rights reserved.</span>
-          <span>Built with REA reverse-engineered physics • React + Framer Motion</span>
+          <span>Crafted with React • TypeScript • Framer Motion</span>
         </footer>
       </section>
     </div>

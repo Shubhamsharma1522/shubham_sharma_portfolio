@@ -30,7 +30,7 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const [isSwiped, setIsSwiped] = useState(false);
 
-  // Exact spring configuration extracted by REA from the live Framer bundle:
+  // Spring physics configuration:
   // transition: { type: "spring", stiffness: 300, damping: 30, delay: 0, mass: 1 }
   const springTransition = {
     type: 'spring' as const,

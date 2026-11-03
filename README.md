@@ -10,7 +10,7 @@ Features a physics-based interactive canvas mesh grid and 3D fanned project card
 - Lucide React
 
 ## Getting Started
-`ash
+```bash
 npm install
 npm run dev
-`
+```
