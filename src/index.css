@@ -4,11 +4,15 @@
   padding: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 body {
   background-color: #060608;
   color: #f3f4f6;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  overflow-x: hidden;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -29,7 +33,6 @@ body {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 }
 
-
 /* Utility classes matching Tailwind styles directly in pure CSS */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
@@ -44,3 +47,59 @@ body {
 .w-full { width: 100%; }
 .min-h-screen { min-height: 100vh; }
 .select-none { user-select: none; }
+
+/* Responsive Mobile Navigation & Layout */
+@media (max-width: 640px) {
+  .nav-island {
+    padding: 6px 14px !important;
+    gap: 10px !important;
+  }
+  .nav-brand-text {
+    display: none !important;
+  }
+  .nav-link-text {
+    display: none !important;
+  }
+  .hero-section {
+    padding: 96px 18px 48px !important;
+    min-height: auto !important;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .hero-cta-group {
+    width: 100% !important;
+  }
+  .hero-cta-button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .section-pad {
+    padding: 64px 18px !important;
+  }
+  .edu-box {
+    padding: 20px 18px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+  }
+  .edu-grade {
+    text-align: left !important;
+  }
+  .footer-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 8px !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .nav-brand-text {
+    display: inline !important;
+  }
+  .nav-link-text {
+    display: inline !important;
+  }
+}

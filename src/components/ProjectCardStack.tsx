@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, PanInfo } from 'framer-motion';
 import { ProjectCard } from '../data/portfolio';
-import { ArrowUpRight, Code, Layers, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
 
 interface ProjectStackProps {
   projects: ProjectCard[];
@@ -23,15 +23,26 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
   tiltAngleStart = 0,
   xOffset = 110,
   perspective = 1100,
-  depthSpacing = 32,
   cardRadius = 20,
 }) => {
   const [projects, setProjects] = useState<ProjectCard[]>(initialProjects);
   const [isDragging, setIsDragging] = useState(false);
   const [isSwiped, setIsSwiped] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const effectiveTilt = isMobile ? 12 : tiltAngle;
+  const effectiveXOffset = isMobile ? 32 : xOffset;
+  const containerWidth = isMobile ? 'min(290px, calc(100vw - 48px))' : '320px';
+  const containerHeight = isMobile ? '430px' : '460px';
 
   // Spring physics configuration:
-  // transition: { type: "spring", stiffness: 300, damping: 30, delay: 0, mass: 1 }
   const springTransition = {
     type: 'spring' as const,
     stiffness: 300,
@@ -76,9 +87,9 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
   return (
     <div
       style={{
-        width: '320px',
+        width: containerWidth,
         maxWidth: '100%',
-        height: '460px',
+        height: containerHeight,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -91,9 +102,9 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
         const isTop = index === 0;
 
         const scale = 1 - index * 0.05;
-        const rot = total > 1 ? tiltAngleStart + (index / (total - 1)) * (tiltAngle - tiltAngleStart) : tiltAngleStart;
-        const xPos = total > 1 ? (index / (total - 1)) * xOffset : 0;
-        const yPos = -(index * 8);
+        const rot = total > 1 ? tiltAngleStart + (index / (total - 1)) * (effectiveTilt - tiltAngleStart) : tiltAngleStart;
+        const xPos = total > 1 ? (index / (total - 1)) * effectiveXOffset : 0;
+        const yPos = -(index * (isMobile ? 6 : 8));
         const zIndex = total - index;
 
         return (
@@ -136,7 +147,7 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
               position: 'absolute',
               width: '100%',
               height: '100%',
-              borderRadius: cardRadius,
+              borderRadius: isMobile ? 16 : cardRadius,
               backgroundColor: '#101015',
               boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85)',
               border: '1px solid rgba(255, 255, 255, 0.12)',
@@ -153,20 +164,20 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
             <div
               style={{
                 position: 'relative',
-                padding: '24px 22px 16px',
+                padding: isMobile ? '16px 16px 12px' : '24px 22px 16px',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                 background: `linear-gradient(135deg, ${project.accentColor}18 0%, transparent 80%)`,
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: isMobile ? '8px' : '14px' }}>
                 <span
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '5px',
-                    padding: '4px 10px',
+                    padding: '3px 8px',
                     borderRadius: '9999px',
-                    fontSize: '11px',
+                    fontSize: isMobile ? '10px' : '11px',
                     fontFamily: '"Geist Mono", monospace',
                     fontWeight: 600,
                     color: project.accentColor,
@@ -180,8 +191,8 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
 
                 <div
                   style={{
-                    width: '32px',
-                    height: '32px',
+                    width: isMobile ? '28px' : '32px',
+                    height: isMobile ? '28px' : '32px',
                     borderRadius: '50%',
                     backgroundColor: 'rgba(255, 255, 255, 0.06)',
                     display: 'flex',
@@ -190,18 +201,18 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
                     color: '#a1a1aa',
                   }}
                 >
-                  <ArrowUpRight size={16} />
+                  <ArrowUpRight size={isMobile ? 14 : 16} />
                 </div>
               </div>
 
               <h3
                 style={{
                   fontFamily: '"Space Grotesk", sans-serif',
-                  fontSize: '20px',
+                  fontSize: isMobile ? '18px' : '20px',
                   fontWeight: 700,
                   letterSpacing: '-0.02em',
                   color: '#ffffff',
-                  margin: '0 0 6px 0',
+                  margin: '0 0 4px 0',
                 }}
               >
                 {project.title}
@@ -209,7 +220,7 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
               <p
                 style={{
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: '12px',
+                  fontSize: isMobile ? '11px' : '12px',
                   color: project.accentColor,
                   fontWeight: 500,
                   margin: 0,
@@ -220,16 +231,16 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
             </div>
 
             {/* Middle Description */}
-            <div style={{ padding: '16px 22px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ padding: isMobile ? '12px 16px' : '16px 22px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <p
                 style={{
                   fontFamily: 'Inter, sans-serif',
-                  fontSize: '13px',
-                  lineHeight: 1.6,
+                  fontSize: isMobile ? '12px' : '13px',
+                  lineHeight: 1.5,
                   color: 'rgba(255, 255, 255, 0.72)',
                   margin: 0,
                   display: '-webkit-box',
-                  WebkitLineClamp: 4,
+                  WebkitLineClamp: isMobile ? 3 : 4,
                   WebkitBoxOrient: 'vertical',
                   overflow: 'hidden',
                 }}
@@ -238,15 +249,15 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
               </p>
 
               {/* Tech stack tags */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', paddingTop: '14px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', paddingTop: isMobile ? '8px' : '14px' }}>
                 {project.techStack.map((tech) => (
                   <span
                     key={tech}
                     style={{
                       fontFamily: '"Geist Mono", monospace',
-                      fontSize: '10px',
-                      padding: '3px 8px',
-                      borderRadius: '6px',
+                      fontSize: isMobile ? '9px' : '10px',
+                      padding: '2px 7px',
+                      borderRadius: '5px',
                       backgroundColor: 'rgba(255, 255, 255, 0.05)',
                       color: 'rgba(255, 255, 255, 0.8)',
                       border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -261,7 +272,7 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
             {/* Bottom Footer Bar */}
             <div
               style={{
-                padding: '14px 22px',
+                padding: isMobile ? '10px 16px' : '14px 22px',
                 borderTop: '1px solid rgba(255, 255, 255, 0.06)',
                 display: 'flex',
                 alignItems: 'center',
@@ -272,7 +283,7 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
               <span
                 style={{
                   fontFamily: '"Geist Mono", monospace',
-                  fontSize: '11px',
+                  fontSize: isMobile ? '10px' : '11px',
                   color: 'rgba(255, 255, 255, 0.45)',
                 }}
               >
@@ -282,7 +293,7 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
               <span
                 style={{
                   fontFamily: '"Geist Mono", monospace',
-                  fontSize: '11px',
+                  fontSize: isMobile ? '10px' : '11px',
                   color: project.accentColor,
                   fontWeight: 600,
                 }}
@@ -306,4 +317,3 @@ export const ProjectCardStack: React.FC<ProjectStackProps> = ({
     </div>
   );
 };
-

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { InteractiveMeshGrid } from './components/InteractiveMeshGrid';
-import { CustomCursor } from './components/CustomCursor';
 import { ProjectCardStack } from './components/ProjectCardStack';
 import {
   PERSONAL_INFO,
@@ -62,10 +61,7 @@ export default function App() {
         trailLength={0.12}
       />
 
-      {/* 2. Custom Framer Floating Cursor */}
-      <CustomCursor label="Drag / Swipe Cards" />
-
-      {/* 3. Floating Island Navigation Header */}
+      {/* 2. Floating Island Navigation Header */}
       <header
         style={{
           position: 'fixed',
@@ -80,6 +76,7 @@ export default function App() {
         }}
       >
         <nav
+          className="nav-island"
           style={{
             pointerEvents: 'auto',
             display: 'flex',
@@ -128,11 +125,11 @@ export default function App() {
             >
               ✦
             </span>
-            <span>Shubham Sharma</span>
+            <span className="nav-brand-text">Shubham Sharma</span>
           </a>
 
           {/* Nav Items */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <a
               href="#projects"
               onClick={() => setActiveSection('projects')}
@@ -146,7 +143,7 @@ export default function App() {
               }}
             >
               <FolderGit2 size={15} />
-              <span className="hidden sm:inline">Projects</span>
+              <span className="nav-link-text">Projects</span>
             </a>
 
             <a
@@ -162,7 +159,7 @@ export default function App() {
               }}
             >
               <Briefcase size={15} />
-              <span className="hidden sm:inline">Experience</span>
+              <span className="nav-link-text">Experience</span>
             </a>
 
             <a
@@ -178,7 +175,7 @@ export default function App() {
               }}
             >
               <Cpu size={15} />
-              <span className="hidden sm:inline">Skills</span>
+              <span className="nav-link-text">Skills</span>
             </a>
 
             <a
@@ -194,7 +191,7 @@ export default function App() {
               }}
             >
               <Mail size={15} />
-              <span className="hidden sm:inline">Contact</span>
+              <span className="nav-link-text">Contact</span>
             </a>
 
             {/* Social Direct Links */}
@@ -225,6 +222,7 @@ export default function App() {
       {/* ── SECTION 1: HERO SPOTLIGHT ── */}
       <section
         id="hero"
+        className="hero-section"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -239,16 +237,17 @@ export default function App() {
         }}
       >
         <div
+          className="hero-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             alignItems: 'center',
-            gap: '64px',
+            gap: '56px',
             width: '100%',
           }}
         >
           {/* Left Hero Typography */}
-          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
 
             {/* Live Status Pill */}
             <div
@@ -274,7 +273,7 @@ export default function App() {
             <h1
               style={{
                 fontFamily: '"Space Grotesk", sans-serif',
-                fontSize: 'clamp(2.6rem, 5.2vw, 3.8rem)',
+                fontSize: 'clamp(2.1rem, 6vw, 3.8rem)',
                 fontWeight: 800,
                 letterSpacing: '-0.03em',
                 lineHeight: 1.1,
@@ -289,7 +288,7 @@ export default function App() {
             <h2
               style={{
                 fontFamily: '"Geist Mono", monospace',
-                fontSize: '15px',
+                fontSize: 'clamp(13px, 3.5vw, 15px)',
                 fontWeight: 600,
                 color: '#3b82f6',
                 letterSpacing: '-0.01em',
@@ -303,7 +302,7 @@ export default function App() {
             <p
               style={{
                 fontFamily: 'Inter, sans-serif',
-                fontSize: '15px',
+                fontSize: '14px',
                 lineHeight: 1.7,
                 color: 'rgba(255, 255, 255, 0.72)',
                 maxWidth: '520px',
@@ -314,9 +313,10 @@ export default function App() {
             </p>
 
             {/* CTAs */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '36px' }}>
+            <div className="hero-cta-group" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '32px' }}>
               <a
                 href="#projects"
+                className="hero-cta-button"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -338,6 +338,7 @@ export default function App() {
 
               <a
                 href={`mailto:${PERSONAL_INFO.email}`}
+                className="hero-cta-button"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -362,8 +363,8 @@ export default function App() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(2, minmax(130px, 1fr))',
-                gap: '12px',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: '10px',
                 width: '100%',
                 maxWidth: '480px',
               }}
@@ -372,7 +373,7 @@ export default function App() {
                 <div
                   key={s.label}
                   style={{
-                    padding: '12px 16px',
+                    padding: '12px 14px',
                     borderRadius: '12px',
                     backgroundColor: 'rgba(255, 255, 255, 0.03)',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -395,7 +396,9 @@ export default function App() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              minHeight: '480px',
+              minHeight: '440px',
+              width: '100%',
+              overflow: 'visible',
             }}
           >
             <ProjectCardStack projects={PROJECTS} cardCount={4} />
@@ -406,6 +409,7 @@ export default function App() {
       {/* ── SECTION 2: WORK EXPERIENCE ── */}
       <section
         id="experience"
+        className="section-pad"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -444,7 +448,7 @@ export default function App() {
         </div>
 
         {/* Experience Timeline Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '24px' }}>
           {EXPERIENCES.map((exp, idx) => (
             <motion.div
               key={exp.company}
@@ -538,6 +542,7 @@ export default function App() {
       {/* ── SECTION 3: TECHNICAL SKILLS & EDUCATION ── */}
       <section
         id="skills"
+        className="section-pad"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -575,7 +580,7 @@ export default function App() {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px' }}>
           {SKILL_CATEGORIES.map((cat) => (
             <div
               key={cat.category}
@@ -627,6 +632,7 @@ export default function App() {
 
         {/* Education Box */}
         <div
+          className="edu-box"
           style={{
             marginTop: '32px',
             borderRadius: '16px',
@@ -651,6 +657,7 @@ export default function App() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#60a5fa',
+                flexShrink: 0,
               }}
             >
               <GraduationCap size={24} />
@@ -665,7 +672,7 @@ export default function App() {
             </div>
           </div>
 
-          <div style={{ textAlign: 'right' }}>
+          <div className="edu-grade" style={{ textAlign: 'right' }}>
             <span style={{ fontSize: '13px', fontFamily: '"Geist Mono", monospace', color: '#60a5fa', fontWeight: 700 }}>
               {EDUCATION.grade}
             </span>
@@ -679,6 +686,7 @@ export default function App() {
       {/* ── SECTION 4: CONTACT & FOOTER ── */}
       <section
         id="contact"
+        className="section-pad"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -729,6 +737,7 @@ export default function App() {
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '14px', marginBottom: '48px' }}>
             <a
               href={`mailto:${PERSONAL_INFO.email}`}
+              className="hero-cta-button"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -751,6 +760,7 @@ export default function App() {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noreferrer"
+              className="hero-cta-button"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -770,7 +780,7 @@ export default function App() {
             </a>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '13px', color: 'rgba(255, 255, 255, 0.5)' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', fontSize: '13px', color: 'rgba(255, 255, 255, 0.5)' }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <MapPin size={14} color="#60a5fa" />
               <span>{PERSONAL_INFO.location}</span>
@@ -784,6 +794,7 @@ export default function App() {
 
         {/* Minimal Footer Signature */}
         <footer
+          className="footer-row"
           style={{
             marginTop: '80px',
             paddingTop: '24px',

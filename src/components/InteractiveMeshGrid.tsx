@@ -248,6 +248,22 @@ export const InteractiveMeshGrid: React.FC<InteractiveMeshGridProps> = ({
       }
     };
 
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = (touch.clientX - rect.left) * scaleX;
+        const y = (touch.clientY - rect.top) * scaleY;
+        mousePos.current = { x, y };
+      }
+    };
+
+    const onTouchEnd = () => {
+      mousePos.current = null;
+    };
+
     const onMouseLeave = () => {
       mousePos.current = null;
     };
@@ -259,6 +275,8 @@ export const InteractiveMeshGrid: React.FC<InteractiveMeshGridProps> = ({
     canvas.addEventListener('mouseleave', onMouseLeave);
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
 
     const resizeObserver = new ResizeObserver(() => {
       initGrid();
@@ -270,6 +288,8 @@ export const InteractiveMeshGrid: React.FC<InteractiveMeshGridProps> = ({
       canvas.removeEventListener('mouseleave', onMouseLeave);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
       resizeObserver.disconnect();
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
