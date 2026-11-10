@@ -1,38 +1,36 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { InteractiveMeshGrid } from './components/InteractiveMeshGrid';
 import { ProjectCardStack } from './components/ProjectCardStack';
+import { JourneyDeck } from './components/JourneyDeck';
+import { ProjectsBento } from './components/ProjectsBento';
+import { PhilosophyFan } from './components/PhilosophyFan';
+import { PlaygroundCanvas } from './components/PlaygroundCanvas';
 import {
   PERSONAL_INFO,
   PROJECTS,
-  EXPERIENCES,
   SKILL_CATEGORIES,
   EDUCATION,
 } from './data/portfolio';
 import {
   Code,
   Briefcase,
-  Terminal,
   Cpu,
   Mail,
   Phone,
   MapPin,
-  ExternalLink,
   Github,
   Linkedin,
   ChevronRight,
-  Layers,
-  Sparkles,
-  Award,
   GraduationCap,
-  ArrowUpRight,
   FolderGit2,
-  CheckCircle2,
+  Sparkles,
+  Compass,
+  Palette,
+  Heart,
 } from 'lucide-react';
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState<'hero' | 'projects' | 'experience' | 'skills' | 'contact'>('hero');
-  const [activeExpTab, setActiveExpTab] = useState(0);
+  const [activeSection, setActiveSection] = useState<'hero' | 'journey' | 'projects' | 'philosophy' | 'skills' | 'socials' | 'contact'>('hero');
 
   return (
     <div
@@ -45,7 +43,7 @@ export default function App() {
         fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       }}
     >
-      {/* 1. Full-screen Interactive Canvas Mesh Grid */}
+      {/* 1. Full-screen Interactive Physics Canvas Mesh Grid */}
       <InteractiveMeshGrid
         gridSize={58}
         repulsionStrength={-0.65}
@@ -61,7 +59,7 @@ export default function App() {
         trailLength={0.12}
       />
 
-      {/* 2. Floating Island Navigation Header */}
+      {/* 2. Floating Island Navigation Header (Matches Sujit's floating island with rich icons) */}
       <header
         style={{
           position: 'fixed',
@@ -81,13 +79,13 @@ export default function App() {
             pointerEvents: 'auto',
             display: 'flex',
             alignItems: 'center',
-            gap: '18px',
-            padding: '8px 22px',
+            gap: '14px',
+            padding: '8px 20px',
             borderRadius: '9999px',
-            fontSize: '13px',
+            fontSize: '12px',
             fontWeight: 500,
-            color: 'rgba(255, 255, 255, 0.65)',
-            background: 'rgba(16, 16, 22, 0.78)',
+            color: 'rgba(255, 255, 255, 0.7)',
+            background: 'rgba(14, 14, 20, 0.82)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
             border: '1px solid rgba(255, 255, 255, 0.12)',
@@ -101,7 +99,7 @@ export default function App() {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              paddingRight: '14px',
+              paddingRight: '12px',
               borderRight: '1px solid rgba(255, 255, 255, 0.12)',
               color: '#ffffff',
               fontWeight: 700,
@@ -129,73 +127,111 @@ export default function App() {
           </a>
 
           {/* Nav Items */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <a
+              href="#journey"
+              onClick={() => setActiveSection('journey')}
+              style={{
+                color: activeSection === 'journey' ? '#60a5fa' : 'rgba(255, 255, 255, 0.65)',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                transition: 'color 0.2s',
+              }}
+              title="Journey"
+            >
+              <Compass size={14} />
+              <span className="nav-link-text">Journey</span>
+            </a>
+
             <a
               href="#projects"
               onClick={() => setActiveSection('projects')}
               style={{
-                color: activeSection === 'projects' ? '#ffffff' : 'rgba(255, 255, 255, 0.65)',
+                color: activeSection === 'projects' ? '#60a5fa' : 'rgba(255, 255, 255, 0.65)',
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '5px',
                 transition: 'color 0.2s',
               }}
+              title="Projects"
             >
-              <FolderGit2 size={15} />
+              <FolderGit2 size={14} />
               <span className="nav-link-text">Projects</span>
             </a>
 
             <a
-              href="#experience"
-              onClick={() => setActiveSection('experience')}
+              href="#philosophy"
+              onClick={() => setActiveSection('philosophy')}
               style={{
-                color: activeSection === 'experience' ? '#ffffff' : 'rgba(255, 255, 255, 0.65)',
+                color: activeSection === 'philosophy' ? '#60a5fa' : 'rgba(255, 255, 255, 0.65)',
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '5px',
                 transition: 'color 0.2s',
               }}
+              title="About"
             >
-              <Briefcase size={15} />
-              <span className="nav-link-text">Experience</span>
+              <Sparkles size={14} />
+              <span className="nav-link-text">About</span>
             </a>
 
             <a
               href="#skills"
               onClick={() => setActiveSection('skills')}
               style={{
-                color: activeSection === 'skills' ? '#ffffff' : 'rgba(255, 255, 255, 0.65)',
+                color: activeSection === 'skills' ? '#60a5fa' : 'rgba(255, 255, 255, 0.65)',
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '5px',
                 transition: 'color 0.2s',
               }}
+              title="Skills"
             >
-              <Cpu size={15} />
+              <Cpu size={14} />
               <span className="nav-link-text">Skills</span>
+            </a>
+
+            <a
+              href="#socials"
+              onClick={() => setActiveSection('socials')}
+              style={{
+                color: activeSection === 'socials' ? '#60a5fa' : 'rgba(255, 255, 255, 0.65)',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                transition: 'color 0.2s',
+              }}
+              title="Playground"
+            >
+              <Palette size={14} />
+              <span className="nav-link-text">Lab</span>
             </a>
 
             <a
               href="#contact"
               onClick={() => setActiveSection('contact')}
               style={{
-                color: activeSection === 'contact' ? '#ffffff' : 'rgba(255, 255, 255, 0.65)',
+                color: activeSection === 'contact' ? '#60a5fa' : 'rgba(255, 255, 255, 0.65)',
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '5px',
                 transition: 'color 0.2s',
               }}
+              title="Contact"
             >
-              <Mail size={15} />
+              <Mail size={14} />
               <span className="nav-link-text">Contact</span>
             </a>
 
             {/* Social Direct Links */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingLeft: '8px', borderLeft: '1px solid rgba(255, 255, 255, 0.12)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingLeft: '8px', borderLeft: '1px solid rgba(255, 255, 255, 0.12)' }}>
               <a
                 href={PERSONAL_INFO.github}
                 target="_blank"
@@ -203,7 +239,7 @@ export default function App() {
                 style={{ color: 'rgba(255, 255, 255, 0.6)', textDecoration: 'none' }}
                 title="GitHub"
               >
-                <Github size={15} />
+                <Github size={14} />
               </a>
               <a
                 href={PERSONAL_INFO.linkedin}
@@ -212,14 +248,14 @@ export default function App() {
                 style={{ color: 'rgba(255, 255, 255, 0.6)', textDecoration: 'none' }}
                 title="LinkedIn"
               >
-                <Linkedin size={15} />
+                <Linkedin size={14} />
               </a>
             </div>
           </div>
         </nav>
       </header>
 
-      {/* ── SECTION 1: HERO SPOTLIGHT ── */}
+      {/* ── SECTION 0: HERO SPOTLIGHT (Interactive Card Fan Deck) ── */}
       <section
         id="hero"
         className="hero-section"
@@ -248,7 +284,6 @@ export default function App() {
         >
           {/* Left Hero Typography */}
           <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
-
             {/* Live Status Pill */}
             <div
               style={{
@@ -406,9 +441,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── SECTION 2: WORK EXPERIENCE ── */}
+      {/* ── SECTION 1: MY JOURNEY (Screen 1: Curved Experience Arc Deck) ── */}
       <section
-        id="experience"
+        id="journey"
         className="section-pad"
         style={{
           position: 'relative',
@@ -419,127 +454,70 @@ export default function App() {
           borderTop: '1px solid rgba(255, 255, 255, 0.06)',
         }}
       >
-        <div style={{ marginBottom: '48px', textAlign: 'center' }}>
-          <span
-            style={{
-              fontFamily: '"Geist Mono", monospace',
-              fontSize: '11px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.08em',
-              color: '#3b82f6',
-              display: 'block',
-              marginBottom: '10px',
-            }}
-          >
-            Professional Milestones
-          </span>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <h2
             style={{
               fontFamily: '"Space Grotesk", sans-serif',
-              fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+              fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
               fontWeight: 800,
-              color: '#ffffff',
               letterSpacing: '-0.02em',
-              margin: 0,
+              color: '#ffffff',
+              margin: '0 0 14px 0',
             }}
           >
-            Work Experience
+            My Journey
           </h2>
+          <p
+            style={{
+              fontSize: '15px',
+              lineHeight: 1.7,
+              color: 'rgba(255, 255, 255, 0.72)',
+              maxWidth: '720px',
+              margin: '0 auto',
+            }}
+          >
+            Engineering for scale and high-impact digital ecosystems. I've spent 3+ years bridging user expectations with robust backend systems. From architecting high-volume crypto exchanges to real-time mobility dispatch algorithms and generative AI automation, my mission remains the same:{' '}
+            <strong style={{ color: '#ffffff' }}>removing friction from the systems that shape our lives.</strong>
+          </p>
         </div>
 
-        {/* Experience Timeline Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '24px' }}>
-          {EXPERIENCES.map((exp, idx) => (
-            <motion.div
-              key={exp.company}
-              whileHover={{ y: -6, borderColor: 'rgba(59, 130, 246, 0.4)' }}
-              style={{
-                borderRadius: '20px',
-                padding: '28px',
-                backgroundColor: 'rgba(18, 18, 24, 0.65)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(16px)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                transition: 'all 0.25s ease',
-              }}
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                  <span
-                    style={{
-                      fontFamily: '"Geist Mono", monospace',
-                      fontSize: '11px',
-                      padding: '3px 10px',
-                      borderRadius: '9999px',
-                      backgroundColor: 'rgba(59, 130, 246, 0.12)',
-                      color: '#60a5fa',
-                      border: '1px solid rgba(59, 130, 246, 0.25)',
-                    }}
-                  >
-                    {exp.period}
-                  </span>
-                  <span style={{ fontSize: '11px', fontFamily: '"Geist Mono", monospace', color: 'rgba(255, 255, 255, 0.4)' }}>
-                    {exp.location}
-                  </span>
-                </div>
-
-                <h3
-                  style={{
-                    fontFamily: '"Space Grotesk", sans-serif',
-                    fontSize: '20px',
-                    fontWeight: 700,
-                    color: '#ffffff',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {exp.role}
-                </h3>
-                <h4
-                  style={{
-                    fontSize: '14px',
-                    color: '#60a5fa',
-                    fontWeight: 600,
-                    marginBottom: '18px',
-                  }}
-                >
-                  {exp.company}
-                </h4>
-
-                <ul style={{ paddingLeft: '18px', margin: '0 0 20px 0', color: 'rgba(255, 255, 255, 0.72)', fontSize: '13px', lineHeight: 1.6 }}>
-                  {exp.highlights.map((h, i) => (
-                    <li key={i} style={{ marginBottom: '8px' }}>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Skills Tags */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                {exp.skills.map((s) => (
-                  <span
-                    key={s}
-                    style={{
-                      fontSize: '10px',
-                      fontFamily: '"Geist Mono", monospace',
-                      padding: '2px 8px',
-                      borderRadius: '6px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                      color: 'rgba(255, 255, 255, 0.7)',
-                    }}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Fanned Arc Experience Deck */}
+        <JourneyDeck />
       </section>
 
-      {/* ── SECTION 3: TECHNICAL SKILLS & EDUCATION ── */}
+      {/* ── SECTION 2: PROJECTS YOU NEED TO SEE (Screen 2: 7 Bento Grid) ── */}
+      <section
+        id="projects"
+        className="section-pad"
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          padding: '100px 24px',
+          maxWidth: '1240px',
+          margin: '0 auto',
+          borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        }}
+      >
+        <ProjectsBento />
+      </section>
+
+      {/* ── SECTION 3: ENGINEERING PHILOSOPHY & LIFE (Screen 3: Split View + 3D Photo Fan) ── */}
+      <section
+        id="philosophy"
+        className="section-pad"
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          padding: '100px 24px',
+          maxWidth: '1240px',
+          margin: '0 auto',
+          borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        }}
+      >
+        <PhilosophyFan />
+      </section>
+
+      {/* ── SECTION 4: TECHNICAL SKILLS MATRIX & EDUCATION ── */}
       <section
         id="skills"
         className="section-pad"
@@ -683,7 +661,23 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── SECTION 4: CONTACT & FOOTER ── */}
+      {/* ── SECTION 5: BEYOND THE CODE / SOCIALS (Screen 4: Draggable Polaroids & Music) ── */}
+      <section
+        id="socials"
+        className="section-pad"
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          padding: '100px 24px',
+          maxWidth: '1240px',
+          margin: '0 auto',
+          borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        }}
+      >
+        <PlaygroundCanvas />
+      </section>
+
+      {/* ── SECTION 6: CONTACT & FOOTER ── */}
       <section
         id="contact"
         className="section-pad"
