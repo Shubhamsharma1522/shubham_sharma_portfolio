@@ -230,3 +230,4 @@ export const PhilosophyFan: React.FC = () => {
     </div>
   );
 };
+
